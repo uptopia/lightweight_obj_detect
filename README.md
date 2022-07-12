@@ -1,7 +1,8 @@
 # lightweight_obj_detect
 ## Plugins for (https://github.com/uptopia/MOST2021_assembly)
 ## Dependencies
-* Install Intel OpenVino
+* Install Intel OpenVino(2021.4.2)
+(https://www.intel.com/content/www/us/en/developer/tools/openvino-toolkit/download.html)
 
 ## Demo from usb_cam
 
