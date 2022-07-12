@@ -3,7 +3,7 @@
 ## Dependencies
 * Install Intel OpenVino
 
-#Demo
+# Demo
 ```
 mkdir MOST2021_assembly
 cd MOST2021_assembly
