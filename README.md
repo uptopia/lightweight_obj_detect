@@ -3,7 +3,7 @@
 ## Dependencies
 * Install Intel OpenVino
 
-# Demo from usb_cam
+## Demo from usb_cam
 
 1. Prepare Environment
 ```
