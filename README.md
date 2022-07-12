@@ -24,7 +24,7 @@ roscd lightweight_obj_detect
 rosrun lightweight_obj_detect NanoDet_Node
 ```
 
-# Demo
+## Demo
 ```
 mkdir MOST2021_assembly
 cd MOST2021_assembly
