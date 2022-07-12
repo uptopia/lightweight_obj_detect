@@ -13,11 +13,15 @@ git clone git@github.com:ycxxn/lightweight_obj_detect.git src
 git https://github.com/ros-drivers/usb_cam.git src
 catkin_make
 ```
-
-
+2. Open usb_cam
+```
+roslaunch usb_cam usb_cam-test.launch
+```
+3. Run object detect
+```
 roscd lightweight_obj_detect
 rosrun lightweight_obj_detect NanoDet_Node
-
+```
 
 # Demo
 ```
