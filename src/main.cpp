@@ -8,8 +8,8 @@
 #include <opencv2/highgui/highgui.hpp>
 #include "nanodet_openvino.h"
 #include "tool.h"
-#include <openvino_test/bbox.h>
-#include <openvino_test/bboxes.h>
+#include <lightweight_obj_detect/bbox.h>
+#include <lightweight_obj_detect/bboxes.h>
 
 static const std::string OPENCV_WINDOW = "Image window";
 auto detector = NanoDet("nanodet.xml");
@@ -21,8 +21,8 @@ class ImageConverter
     image_transport::ImageTransport it_;
     image_transport::Subscriber image_sub_;
 
-    ros::Publisher pub_other_objs = nh_.advertise<openvino_test::bboxes>("/Det_other_objs_bboxes", 1000);
-    ros::Publisher pub_motors = nh_.advertise<openvino_test::bboxes>("/Det_motor_bboxes", 1000);
+    ros::Publisher pub_other_objs = nh_.advertise<lightweight_obj_detect::bboxes>("/Det_other_objs_bboxes", 1000);
+    ros::Publisher pub_motors = nh_.advertise<lightweight_obj_detect::bboxes>("/Det_motor_bboxes", 1000);
 
 public:
     ImageConverter()
@@ -59,8 +59,8 @@ public:
 
     void msg_publish(const cv::Mat& bgr, const std::vector<BoxInfo>& bboxes, object_rect effect_roi)
     {   
-        openvino_test::bboxes bbs_other_objs;
-        openvino_test::bboxes bbs_motors;
+        lightweight_obj_detect::bboxes bbs_other_objs;
+        lightweight_obj_detect::bboxes bbs_motors;
 
         static const char* class_names[] = { "screw", "screw_n", "motor", "terminal+", "terminal-"};
 
@@ -75,7 +75,7 @@ public:
 
         for (size_t i = 0; i < bboxes.size(); i++)
         {   
-            openvino_test::bbox bb;
+            lightweight_obj_detect::bbox bb;
             const BoxInfo& bbox = bboxes[i];
             xmin = (bbox.x1 - effect_roi.x) * width_ratio;
             ymin = (bbox.y1 - effect_roi.y) * height_ratio;
