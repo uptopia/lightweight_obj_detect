@@ -8,10 +8,11 @@ https://www.intel.com/content/www/us/en/developer/tools/openvino-toolkit/downloa
 
 1. Prepare Environment
 ```
-mkdir MOST2021_assembly
-cd MOST2021_assembly
-git clone git@github.com:ycxxn/lightweight_obj_detect.git src
-git https://github.com/ros-drivers/usb_cam.git src
+mkdir -p MOST2021_assembly/src
+cd MOST2021_assembly/src
+git clone https://github.com/ycxxn/lightweight_obj_detect.git
+git clone https://github.com/ros-drivers/usb_cam.git
+cd ..
 catkin_make
 ```
 2. Open usb_cam
