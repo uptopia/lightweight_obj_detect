@@ -27,9 +27,10 @@ rosrun lightweight_obj_detect NanoDet_Node
 
 ## Demo
 ```
-mkdir MOST2021_assembly
-cd MOST2021_assembly
-git git@github.com:ycxxn/lightweight_obj_detect.git src
+mkdir -p MOST2021_assembly/src
+cd MOST2021_assembly/src
+git https://github.com/ycxxn/lightweight_obj_detect.git
+cd ..
 catkin_make
 roscd lightweight_obj_detect
 rosrun lightweight_obj_detect NanoDet_Node
