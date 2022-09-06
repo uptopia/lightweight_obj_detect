@@ -1,4 +1,7 @@
 #include <iostream>
+#include <unistd.h>
+#include <bits/stdc++.h>
+
 #include <ros/ros.h>
 #include <image_transport/image_transport.h>
 #include <cv_bridge/cv_bridge.h>
@@ -11,8 +14,11 @@
 #include <lightweight_obj_detect/bbox.h>
 #include <lightweight_obj_detect/bboxes.h>
 
+using namespace std;
+
 static const std::string OPENCV_WINDOW = "Image window";
-auto detector = NanoDet("nanodet.xml");
+const char *nanodet_xml = "/home/dual-arm/MOST_lightweight/src/lightweight_obj_detect/nanodet.xml";
+NanoDet detector = NanoDet(nanodet_xml);
 bool draw = true;
 
 class ImageConverter
@@ -27,9 +33,8 @@ class ImageConverter
 public:
     ImageConverter()
     : it_(nh_)
-    {
+    {   
         image_sub_ = it_.subscribe("/camera/color/image_raw_workspace", 1, &ImageConverter::imageCb, this);
-
     }
 
     ~ImageConverter()
@@ -47,7 +52,7 @@ public:
         cv::Mat resized_img;
         resize_uniform(cv_ptr->image, resized_img, cv::Size(416, 416), effect_roi);
 
-        auto results = detector.detect(resized_img, 0.4, 0.5);
+        auto results = detector.detect(resized_img, 0.4, 0.5); //std::vector<BoxInfo>
 
         if(draw==true)draw_bboxes(cv_ptr->image, results, effect_roi);
         this->msg_publish(cv_ptr->image, results, effect_roi);
@@ -110,9 +115,20 @@ public:
 
 
 int main(int argc, char** argv)
-{
-  ros::init(argc, argv, "Det_Node");
-  ImageConverter ic;
-  ros::spin();
-  return 0;
+{   
+
+    // // Current Path
+    // char cwd[50];
+    // if(getcwd(cwd, sizeof(cwd)) != NULL)
+    //     cout << "Current Path: " << cwd << endl;
+    // else
+    //     cout << "Error" << endl;
+
+    // absolute_path = std::string(cwd) + "/src/lightweight_obj_detect/nanodet.xml";
+    // cout <<"Path: " << absolute_path <<endl;
+    
+    ros::init(argc, argv, "Det_Node");
+    ImageConverter ic;
+    ros::spin();
+    return 0;
 }
