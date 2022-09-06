@@ -21,14 +21,14 @@ class ImageConverter
     image_transport::ImageTransport it_;
     image_transport::Subscriber image_sub_;
 
-    ros::Publisher pub_other_objs = nh_.advertise<lightweight_obj_detect::bboxes>("/Det_other_objs_bboxes", 1000);
-    ros::Publisher pub_motors = nh_.advertise<lightweight_obj_detect::bboxes>("/Det_motor_bboxes", 1000);
+    ros::Publisher pub_other_objs = nh_.advertise<lightweight_obj_detect::bboxes>("/yolov4_other_objs_bboxes", 1000);
+    ros::Publisher pub_motors = nh_.advertise<lightweight_obj_detect::bboxes>("/yolov4_motors_bboxes", 1000);
 
 public:
     ImageConverter()
     : it_(nh_)
     {
-        image_sub_ = it_.subscribe("/usb_cam/image_raw", 1, &ImageConverter::imageCb, this);
+        image_sub_ = it_.subscribe("/camera/color/image_raw_workspace", 1, &ImageConverter::imageCb, this);
 
     }
 
